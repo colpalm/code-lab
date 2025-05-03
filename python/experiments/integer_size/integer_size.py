@@ -1,6 +1,6 @@
 import sys
 
-def inspect_integer_size(value):
+def inspect_integer_size(value: int):
     size_bytes = sys.getsizeof(value)
     size_bits = size_bytes * 8
     digit_count = len(str(abs(value)))
