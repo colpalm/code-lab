@@ -1,38 +1,34 @@
 import timeit
 import pandas as pd
 
+PROBLEM_SIZES = [100_000, 1_000_000, 10_000_000]
+METHODS = {
+    "append": "lst = []\nfor i in range({n}): lst.append(i)",
+    "comprehension": "lst = [i for i in range({n})]"
+}
 
-def build_dataframe(num, time_results, results_list):
-    row = {"N": num}
-    for idx, t in enumerate(time_results, start=1):
-        row[f"run_{idx}"] = t
-    results_list.append(row)
+def measure(method_name: str, statement_template: str, problem_sizes: list[int], repeat: int = 5) -> list[dict]:
+    rows = []
+    for size in problem_sizes:
+        stmt = statement_template.format(n=size)
+        setup = ""
+        times = timeit.repeat(stmt, setup, repeat=repeat, number=1, globals=globals())
 
-def print_individual_results(num, time_results):
-    avg = sum(time_results) / len(time_results)
-    print(f"N={num}")
-    print(f"  runs: {['{:.6f}'.format(t) for t in time_results]}")
-    print(f"  min={min(time_results):.6f}, avg={avg:.6f}, max={max(time_results):.6f}\n")
+        # Transfer to dict
+        row = construct_row(size, method_name, times)
+        rows.append(row)
+    return rows
 
+def construct_row(n, method_identifier, times) -> dict:
+    r = {"N": n, "method": method_identifier}
+    for idx, t in enumerate(times, start=1):
+        r[f"run_{idx}"] = t
+    return r
 
-setup = "lst = []"
-stmt = """
-for i in range(N):
-    lst.append(i)
-""".strip()
-results = []
-
-for N in (10**5, 10**6, 10**7):
-    times = timeit.repeat(
-        stmt.format(N=N),
-        setup=setup,
-        repeat=5,  # run the whole loop 5 times
-        number=1,  # each repeat executes it once
-        globals=globals()
-    )
-    build_dataframe(N, times, results)
-    print_individual_results(N, times)
-
-df = pd.DataFrame(results)
-print(df)
+if __name__ == "__main__":
+    results = []
+    for method, statement in METHODS.items():
+        results.extend(measure(method, statement, PROBLEM_SIZES))
+    df = pd.DataFrame(results)
+    print(df)
 
