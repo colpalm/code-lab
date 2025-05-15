@@ -1,10 +1,11 @@
-# language-laboratory
+# code-lab
 
-A feature-by-feature experimental compairon of Python, Java and Rust performance characteristics.
+A playground for random, individual code experiments across multiple programming languages.
 
 ## Overview
 
-This project compares the performance characteristics of Python, Java, and Rust across various programming features and patterns. Each experiment is designed to provide objective metrics.
+This repository is a collection of standalone experiments created for learning, prototyping, or exploration purposes.  
+Each experiment lives in its own directory and is not necessarily related to others. Some may be expanded upon in blog posts or other write-ups.
 
 ## Getting Started
 
@@ -13,18 +14,28 @@ Language Versions:
 - Java: TBD
 - Rust: TBD
 
-This project uses language-specific package managers:
-- Python: uv
-- Java: Maven
-- Rust: Cargo
-
-To set up the development environment, install the appropriate versions and tools for each language.
+Each language uses its own package/build tool:
+- Python: [uv](https://github.com/astral-sh/uv)
+- Java: [Maven](https://maven.apache.org/)
+- Rust: [Cargo](https://doc.rust-lang.org/cargo/)
 
 ## Run Experiments
+To run experiments, refer to the README files located in each language-specific directory:
+- [`python/README.md`](./python/README.md)
+
+Each will provide setup and execution instructions tailored to that language's ecosystem.
+
+## ---- DELETE BELOW ----
+
 ### Python
 From the root of the project, specify the directory to run the experiments in and the name of the experiment to run.
 ```bash
 uv --directory ./python run python experiments/<experiment-directory>/<experiment-file.py>
 ```
 ### Java
+Compile the project and run the experiment.
+```bash
+mvn compile -f ./java/pom.xml
+```
+
 ### Rust
