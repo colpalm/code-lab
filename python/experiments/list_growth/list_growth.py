@@ -1,10 +1,14 @@
 import timeit
 import pandas as pd
+import numpy as np
 
 PROBLEM_SIZES = [100_000, 1_000_000, 10_000_000]
 METHODS = {
     "append": "lst = []\nfor i in range({n}): lst.append(i)",
-    "comprehension": "lst = [i for i in range({n})]"
+    "comprehension": "lst = [i for i in range({n})]",
+    "numpy_array": "arr = np.arange({n})",
+    "numpy_to_list": "lst = np.arange({n}).tolist()",
+    "generator": "lst = list((i for i in range({n})))"
 }
 
 def measure(method_name: str, statement_template: str, problem_sizes: list[int], repeat: int = 5) -> list[dict]:
