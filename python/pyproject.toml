@@ -1,7 +1,9 @@
 [project]
-name = "language-laboratory"
+name = "code-lab"
 version = "0.1.0"
-description = "Experiment comparison of performance characteristics of different programming languages"
+description = "General coding experiments"
 readme = "README.md"
 requires-python = "==3.12.0"
-dependencies = []
+dependencies = [
+    "pandas>=2.2.3",
+]
