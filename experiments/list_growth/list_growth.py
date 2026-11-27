@@ -1,3 +1,10 @@
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "numpy==2.2.6",
+#     "pandas==2.3.0",
+# ]
+# ///
 import timeit
 import pandas as pd
 import numpy as np

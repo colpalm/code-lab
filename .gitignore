@@ -6,3 +6,6 @@ __pycache__/
 # IDEs / OS
 .idea
 .DS_Store
+
+# Rust / Java build output
+target/
