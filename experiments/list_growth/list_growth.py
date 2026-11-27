@@ -2,6 +2,7 @@ import timeit
 import pandas as pd
 import numpy as np
 import json
+from pathlib import Path
 
 PROBLEM_SIZES = [100_000, 1_000_000, 10_000_000]
 METHODS = {
@@ -57,7 +58,7 @@ def export_min_chart_json(input_df: pd.DataFrame) -> None:
         'datasets': datasets
     }
 
-    with open('./experiments/list_growth/min_chart_data.json', 'w') as f:
+    with open(Path(__file__).with_name('min_chart_data.json'), 'w') as f:
         json.dump(chart_data, f)
 
 if __name__ == "__main__":

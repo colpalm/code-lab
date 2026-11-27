@@ -1,0 +1,17 @@
+[project]
+name = "code-lab"
+version = "0.1.0"
+description = "General coding experiments"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+# Each area gets its own group so experiments never pull in eval dependencies (and vice versa).
+[dependency-groups]
+experiments = [
+    "numpy",
+    "pandas>=2.2.3",
+]
+
+[tool.uv]
+default-groups = ["experiments"]
